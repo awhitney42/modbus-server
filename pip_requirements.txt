@@ -1,0 +1,7 @@
+future==1.0.0
+iso8601==2.1.0
+pymodbus==3.11.3
+pyModbusTCP==0.3.0
+pyserial==3.5
+PyYAML==6.0.3
+serial==0.0.97
