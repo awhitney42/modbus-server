@@ -16,13 +16,14 @@ class MyDataBank(DataBank):
 
     def __init__(self, port):
         # turn off allocation of memory for standard modbus object types
-        # only "holding registers" space will be replaced by dynamic build values.
+        # only "holding registers" space will be replaced by
+        # dynamic build values.
         self.serial_port = port
         super().__init__(virtual_mode=True)
 
     def get_holding_registers(self, address, number=1, srv_info=None):
         """Get virtual holding registers."""
-        # populate virtual registers dict with current datetime values
+        # populate virtual registers dict with bytes read from serial port
         now = datetime.now()
 
         rx = self.serial_port.read_data(3)
@@ -67,7 +68,7 @@ if __name__ == '__main__':
     parser.add_argument('device', type=str, help='serial device (like /dev/ttyUSB0)')
     parser.add_argument('-H', '--host', type=str, default='localhost', help='host (default: localhost)')
     parser.add_argument('-p', '--port', type=int, default=502, help='TCP port (default: 502)')
-    parser.add_argument('-b', '--baudrate', type=int, default=9600, help='serial rate (default is 9600)')
+    parser.add_argument('-b', '--baudrate', type=int, default=1200, help='serial rate (default is 1200)')
     parser.add_argument('-t', '--timeout', type=float, default=1.0, help='timeout delay (default is 1.0 s)')
     parser.add_argument('-e', '--eof', type=float, default=0.05, help='end of frame delay (default is 0.05 s)')
     parser.add_argument('-d', '--debug', action='store_true', help='set debug mode')
